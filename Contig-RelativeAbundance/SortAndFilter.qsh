@@ -1,0 +1,21 @@
+#!/bin/sh
+#PBS -W group_list=cu_10108 -A cu_10108
+### Number of nodes
+#PBS -l nodes=1:ppn=7:thinnode
+### Memory
+#PBS -l mem=30gb
+### Requesting time - format is <days>:<hours>:<minutes>:<seconds>
+#PBS -l walltime=1:00:00:00
+# Go to the directory from where the job was submitted (initial directory is $HOME)
+echo Working directory is $PBS_O_WORKDIR
+cd $PBS_O_WORKDIR
+### Fun starts here
+# Activate environment
+. "/home/projects/cu_10108/people/astlau/bin/anaconda3/etc/profile.d/conda.sh"
+conda activate /home/projects/cu_10108/people/russel/Software/miniconda3/envs/msamtools
+# Generate variables
+HERE="/home/projects/cu_10108/data/Generated"
+NAME=$(echo $1 | sed 's/.bam$//;s|.*\/||')
+# Run samtools
+samtools sort -@7 -n $1 -o ${HERE}/sortfilteredmaps/${NAME}.sort.bam
+msamtools filter -b -l 80 -p 95 -z 80 --besthit ${HERE}/sortfilteredmaps/${NAME}.sort.bam > ${HERE}/sortfilteredmaps/${NAME}.filteredsort.bam
