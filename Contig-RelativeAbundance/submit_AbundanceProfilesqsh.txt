@@ -1,0 +1,2 @@
+for i in /home/projects/cu_10108/data/Generated/sortfilteredmaps/*.filteredsort.bam;
+do qsub abundanceprofile.qsh -F "$i"; sleep 1s; done
