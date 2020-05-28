@@ -1,0 +1,4 @@
+cp allcrisprsystems_template.txt allcrisprsystems_counts_crisprcas_and_casorphans.txt;
+
+for i in /home/projects/cu_10108/data/Generated/CCtyper_results/*;
+do cat <(cut -f4 $i/CRISPR_Cas.tab | tail -n+2) <(cut -f5 $i/cas_operons_orphan.tab | tail -n+2) | sort | python3 counts.py $i >> allcrisprsystems_counts_crisprcas_and_casorphans.txt; done
