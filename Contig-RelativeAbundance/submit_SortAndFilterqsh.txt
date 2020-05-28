@@ -1,0 +1,2 @@
+for i in /home/projects/cu_10108/data/Generated/Russel/map/*.bam;
+do qsub sortfilter.qsh -F "$i"; sleep 1s; done
