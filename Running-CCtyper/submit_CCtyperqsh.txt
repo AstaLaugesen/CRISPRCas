@@ -1,0 +1,2 @@
+for i in /home/projects/cu_10108/data/Generated/Assemblies/*.fna;
+do qsub CCtyper.qsh -F "$i"; sleep 1s; done
