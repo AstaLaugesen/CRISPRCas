@@ -1,0 +1,7 @@
+cp allcrisprsystems_template.txt allcrisprsystems_abundance_crisprcas_and_casorphans.txt;
+
+for i in /home/projects/cu_10108/data/Generated/CCtyper_results/*;
+do
+HERE="/home/projects/cu_10108/data/Generated"
+NAME=$(echo $i | sed 's/$//;s|.*\/..........||')
+cat <(cut -f1,4 $i/CRISPR_Cas.tab | tail -n+2) <(cut -f1,5 $i/cas_operons_orphan.tab | tail -n+2) | sort | python3 abundance.py ${HERE}/abundance_profiles/${NAME}.profile.txt.gz $i >> allcrisprsystems_abundance_crisprcas_and_casorphans.txt; done
