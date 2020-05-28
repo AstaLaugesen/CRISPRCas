@@ -1,0 +1,20 @@
+#!/bin/sh
+#PBS -W group_list=cu_10108 -A cu_10108
+### Number of nodes
+#PBS -l nodes=1:ppn=28:thinnode
+### Memory
+#PBS -l mem=120gb
+### Requesting time - format is <days>:<hours>:<minutes>:<seconds>
+#PBS -l walltime=1:00:00:00
+# Go to the directory from where the job was submitted (initial directory is $HOME)
+echo Working directory is $PBS_O_WORKDIR
+cd $PBS_O_WORKDIR
+### Fun starts here
+# Activate environment
+. "/home/projects/cu_10108/people/astlau/bin/anaconda3/etc/profile.d/conda.sh"
+conda activate cctyper
+# Generate variables
+HERE="/home/projects/cu_10108/data/Generated"
+NAME=$(echo $1 | sed 's/.fna$//;s|.*\/||')
+# Run caspredict
+cctyper $1 ${HERE}/CCtyper_results/${NAME} --prodigal meta -t28
