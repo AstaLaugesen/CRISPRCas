@@ -20,7 +20,7 @@ IIA, IIB, IIC,
 IIIA, IIIB, IIIC, IIID, IIIE, IIIF,
 IVA1, IVA2, IVA3, IVB, IVC, IVD, IVE,
 VA, VB, VC, VD, VE, VF, VG, VH, VI, VJ, VK,
-VIA, VIB, VIC, VID, unk)=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+VIA, VIB, VIC, VID)=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 #Looking for each subtype and adding to its relative abundance with regular expressions:
 for line in sys.stdin:
@@ -180,19 +180,16 @@ for line in sys.stdin:
                 contig=re.search(r'^([-\w.]+)\s', line).group(1)
                 foundAbundance=findAbundance(contig)
                 VID+=foundAbundance
-        if re.search(r'\s+(Unknown\n|Hybrid\WUnknown,|\S+,Unknown\W)',line):
-                contig=re.search(r'^([-\w.]+)\s', line).group(1)
-                foundAbundance=findAbundance(contig)
-                unk+=foundAbundance
 
-#Setting name of sample
+
+#Setting name/ID of sample
 SampleName=0
 SampleName=re.search(r'results/(\S+)',sys.argv[2]).group(1)
 
-#Printing results:
+#Printing line with results:
 print("S"+SampleName+"\t",IA,"\t",IB,"\t",IC,"\t",ID,"\t",IE,"\t",IF,"\t",IFT,"\t",IG,"\t",
 IIA,"\t",IIB,"\t",IIC,"\t",
 IIIA,"\t",IIIB,"\t",IIIC,"\t",IIID,"\t",IIIE,"\t",IIIF,"\t",
 IVA1,"\t",IVA2,"\t",IVA3,"\t",IVB,"\t",IVC,"\t",IVD,"\t",IVE,"\t",
 VA,"\t",VB,"\t",VC,"\t",VD,"\t",VE,"\t",VF,"\t",VG,"\t",VH,"\t",VI,"\t",VJ,"\t",VK,"\t",
-VIA,"\t",VIB,"\t",VIC,"\t",VID,"\t", unk)
+VIA,"\t",VIB,"\t",VIC,"\t",VID)
