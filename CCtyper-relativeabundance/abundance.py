@@ -5,10 +5,10 @@ import sys,re,gzip
 #Making a function that returns the relative abundance of the contig the subtype is found on
 def findAbundance(contigName):
         abundance=0
-        #Opening profiles made with msamtools:
+        #Opening relative abundance profiles made with msamtools:
         with gzip.open(sys.argv[1],'rt') as infile:
                 for abundanceProfile in infile:
-                        #If the contigname is found in the profile, the relative abundance is saved:
+                        #If the contigname is found in the profile, the relative abundance is saved as a float value:
                         if contigName in abundanceProfile:
                                 abundance=float(re.search(r'\s+([-\w.]+)\n', abundanceProfile).group(1))
                                 return(abundance)
@@ -22,7 +22,7 @@ IVA1, IVA2, IVA3, IVB, IVC, IVD, IVE,
 VA, VB, VC, VD, VE, VF, VG, VH, VI, VJ, VK,
 VIA, VIB, VIC, VID)=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
-#Looking for each subtype and adding to its relative abundance with regular expressions:
+#Looking for each subtype and adding its relative abundance with regular expressions:
 for line in sys.stdin:
         if re.search(r'\s+(I\WA\n|Hybrid\WI\WA,|\S+,I\WA\W)',line):
                 contig=re.search(r'^([-\w.]+)\s', line).group(1)
