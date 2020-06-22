@@ -7,7 +7,7 @@ IIA, IIB, IIC,
 IIIA, IIIB, IIIC, IIID, IIIE, IIIF,
 IVA1, IVA2, IVA3, IVB, IVC, IVD, IVE,
 VA, VB, VC, VD, VE, VF, VG, VH, VI, VJ, VK,
-VIA, VIB, VIC, VID, unk)=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+VIA, VIB, VIC, VID)=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 #Using regular expressions to look for each subtype:
 for line in sys.stdin:
@@ -89,8 +89,7 @@ for line in sys.stdin:
                 VIC+=1
         if re.search(r'(^|\W)VI\WD',line):
                 VID+=1
-        if re.search(r'(^|\W)Unknown',line):
-                unk+=1
+
 
 #Setting name of sample
 SampleName=0
@@ -102,5 +101,5 @@ IIA,"\t",IIB,"\t",IIC,"\t",
 IIIA,"\t",IIIB,"\t",IIIC,"\t",IIID,"\t",IIIE,"\t",IIIF,"\t",
 IVA1,"\t",IVA2,"\t",IVA3,"\t",IVB,"\t",IVC,"\t",IVD,"\t",IVE,"\t",
 VA,"\t",VB,"\t",VC,"\t",VD,"\t",VE,"\t",VF,"\t",VG,"\t",VH,"\t",VI,"\t",VJ,"\t",VK,"\t",
-VIA,"\t",VIB,"\t",VIC,"\t",VID,"\t", unk)
+VIA,"\t",VIB,"\t",VIC,"\t",VID)
 
